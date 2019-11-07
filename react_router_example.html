@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src='https://unpkg.com/react-router-dom@5.0.0/umd/react-router-dom.min.js'></script>
+    <script src='https://unpkg.com/babel-standalone@6.26.0/babel.js'></script>
+
+    <!-- original code from: https://stackoverflow.com/questions/40764596/using-react-router-with-cdn-and-without-webpack-or-browserify -->
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #header {
+            width: 1fr;
+            background: lightgreen;
+        }
+
+        /* The link 'a' is inside the list item 'li' */
+        #header li,a {
+            display: inline-block;
+            padding: 5px 10px;
+            text-decoration:none;
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+        }
+
+        #header li {
+            /* border: 1px solid black; */
+            padding: 0;
+        }
+
+        /* set the active NavLink attributes */
+        .active {
+            background-color: rgb(15, 134, 207);
+            color: white;
+        }
+
+    </style>
+
+  </head>
+  <body>
+    <div id='root'></div>
+
+    <script type='text/babel'>
+
+      const Route   = ReactRouterDOM.Route;
+      const NavLink = ReactRouterDOM.NavLink;
+
+      const App = props => (
+        <ReactRouterDOM.HashRouter>
+          <ul id="header">
+            <li><NavLink exact to="/">HOME</NavLink></li>
+            <li><NavLink to="/a">A</NavLink></li>
+            <li><NavLink to="/b">B</NavLink></li>
+          </ul>
+
+          <Route exact path="/"  component={Home} />
+          <Route path="/a" component={A} />
+          <Route path="/b" component={B} />
+        </ReactRouterDOM.HashRouter>
+      )
+
+      const Home = props => <h1>HOME</h1>
+      const A = props => <h1>A</h1>
+      const B = props => <h1>B</h1>
+
+      ReactDOM.render(<App />, document.querySelector('#root'));
+    </script>
+  </body>
+</html>
